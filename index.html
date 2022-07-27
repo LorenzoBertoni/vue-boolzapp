@@ -7,7 +7,7 @@
     <title>BoolzApp</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="debug">
+<body>
 
     <div class="bg_color"></div>
     
@@ -58,7 +58,43 @@
             </aside>
 
             <main class="main-container-body">
+                <header class="main-body-header">
+                    <div class="active-contact-info-container">
+                        <div class="active-contact-pic-container">
+                            <img class="active-contact-img " :src="'img/avatar' + contacts[activeContact].avatar + '.jpg'" alt="">
+                        </div>
+                        
+                        <div class="active-contact-info">
+                            <h3>{{contacts[activeContact].name}}</h3>
+                            <p>ultimo accesso</p>
+                        </div>
+                    </div>
 
+                    <div class="active-contact-actions">
+                        <span>icon</span>
+                        <span>icon</span>
+                        <span>icon</span>
+                    </div>
+                    
+                </header>
+
+                <main class="chat">
+                    <div class="message" v-for="message in contacts[activeContact].messages" :class="(contacts[activeContact].messages.status == 'sent')? 'sent-message': 'received-message'">
+                        <p class="message-text">{{message.message}}</p>
+                    </div>
+                </main>
+
+                <footer class="user-input-bar">
+                    <div class="emojis">
+                        <span>icon</span>
+                    </div>
+                    <div class="message-bar">
+                        <input type="text" placeholder="messaggio" class="message-input">
+                    </div>
+                    <div class="rec">
+                        <span>icon</span>
+                    </div>
+                </footer>
             </main>
 
         </div>

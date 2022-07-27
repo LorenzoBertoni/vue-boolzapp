@@ -16,17 +16,8 @@
 
 
 /* DEBUG */
-.debug .web-app-main-container {
-    border: 1px solid black;
-}
 
-.debug .main-container-aside {
-    border: 2px solid red;
-}
 
-.debug .main-container-body {
-    border: 2px solid green;
-}
 
 .debug .aside-header {
     border: 1px solid yellow;
@@ -62,7 +53,7 @@ body {
 }
 
 .web-app-main-container {
-    width: 1180px;
+    width: 1500px;
     height: 95vh;
     margin: 1rem auto;
     position: absolute;
@@ -70,6 +61,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    border: 1px solid black;
 }
 
 .main-container-aside {
@@ -78,11 +70,13 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #fff;
+    border: 1px solid black;
 }
 
 .main-container-body {
     width: 60%;
     height: 100%;
+    background: url('../img/mine.jpg');
 }
 
 .aside-header {
@@ -99,7 +93,7 @@ body {
     justify-content: space-between;
 }
 
-.user-img, .contact-pic {
+.user-img, .contact-pic, .active-contact-img {
     width: 50px;
     border-radius: 50%;
     display: block;
@@ -159,4 +153,66 @@ body {
 
 .contact-name, .contact-message {
     margin-left: .5rem;
+}
+
+.main-body-header {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8%;
+}
+
+.active-contact-info-container {
+    display: flex;
+}
+
+.chat {
+    height: 87%;
+    overflow: auto;
+}
+
+.message {
+    width: fit-content;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+    background-color: #009688;
+}
+
+.sent-message {
+    background-color: var(--user-message-bg_color);
+    margin-left: 620px;
+    margin-top: 10px;
+}
+
+.received-message {
+    background-color: #fff;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
+
+
+
+
+.user-input-bar {
+    background-color: #fff;
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 25px;
+}
+
+.emojis, .rec {
+    width: 8%;
+}
+
+.message-bar {
+    width: 80%;
+}
+
+.message-bar > input {
+    width: 100%;
 }
