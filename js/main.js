@@ -2,6 +2,7 @@ const app = new Vue({
     el: '#app',
     data: {
         activeContact: 0,
+        input: '',
         contacts: [
             {
                 name: 'Michele',
@@ -169,6 +170,19 @@ const app = new Vue({
     methods: {
         changeChat(index) {
             this.activeContact = index;
+        },
+        sendMessage() {
+            if (!this.input.trim() == '') {
+                this.contacts[this.activeContact].messages.push(
+                    {
+                        date: '10/01/2020 15:50:00',
+                        message: this.input,
+                        status: 'sent'
+                    }
+                )
+                this.input = '';
+            }
+            
         }
     }
 });  

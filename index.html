@@ -6,38 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BoolzApp</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <div class="bg_color"></div>
     
     <div id="app">
-
         <div class="web-app-main-container">
-
             <aside class="main-container-aside">
                 <header class="aside-header">
                     <div class="user">
                         <div class="user-info">
-                            <img class="user-img" src="img/avatar_1.jpg" alt="">
-                            <span class="user-name">Username</span>
+                            <img class="user-img" src="img/avatar_7.jpg" alt="Profile pic">
+                            <span class="user-name">Lorenzo</span>
                         </div>
 
                         <div class="user-actions">
-                            <span>icon</span>
-                            <span>icon</span>
-                            <span>icon</span>
+                            <i class="fa-solid fa-circle-notch"></i>
+                            <i class="fa-solid fa-message"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
                 </header>
 
                 <div class="aside-search-bar">
                     <div class="search-bar-icon">
-                        <span>icon</span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
 
                     <div class="search-bar">
-                        <input type="text" placeholder="cerca">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat">
                     </div>
                 </div>
 
@@ -65,15 +64,15 @@
                         </div>
                         
                         <div class="active-contact-info">
-                            <h3>{{contacts[activeContact].name}}</h3>
-                            <p>ultimo accesso</p>
+                            <h3 class="contact-name">{{contacts[activeContact].name}}</h3>
+                            <p class="last-acces">Ultimo accesso oggi alle 12:00</p>
                         </div>
                     </div>
 
                     <div class="active-contact-actions">
-                        <span>icon</span>
-                        <span>icon</span>
-                        <span>icon</span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                     
                 </header>
@@ -86,19 +85,17 @@
 
                 <footer class="user-input-bar">
                     <div class="emojis">
-                        <span>icon</span>
+                        <i class="fa-regular fa-face-smile"></i>
                     </div>
                     <div class="message-bar">
-                        <input type="text" placeholder="messaggio" class="message-input">
+                        <input type="text" placeholder="Scrivi un messaggio" class="message-input" v-model="input" @keyup.enter="sendMessage">
                     </div>
                     <div class="rec">
-                        <span>icon</span>
+                        <i class="fa-solid fa-microphone"></i>
                     </div>
                 </footer>
             </main>
-
         </div>
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>

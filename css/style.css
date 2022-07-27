@@ -13,37 +13,12 @@
     --main-interface-element-color: #6B7376;
 }
 
-
-
-/* DEBUG */
-
-
-
-.debug .aside-header {
-    border: 1px solid yellow;
-}
-
-.debug .aside-search-bar {
-    border: 1px solid blue;
-}
-
-.debug .search-bar-icon {
-    border: 1px solid black;
-}
-
-.debug .contact-list {
-    border: 2px solid green;
-}
-/* DEBUG */
-
-
-
-
 body {
     background-color: var(--bg_primary-color);
     position: relative;
     width: 100vw;
     height: 100vh;
+    font-family: sans-serif;
 } 
 
 .bg_color {
@@ -70,7 +45,6 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    border: 1px solid black;
 }
 
 .main-container-body {
@@ -81,16 +55,30 @@ body {
 
 .aside-header {
     width: 100%;
-    height: 55px;
 }
 
 .user, .user-info {
     display: flex;
     align-items: center;
+    background-color: var(--main-interface-color);
 }
 
 .user {
     justify-content: space-between;
+}
+
+.user-info {
+    padding: .5rem 1rem;
+}
+
+.user-actions {
+    padding: .5rem 1rem;
+}
+
+.user-actions i {
+    margin-left: 10px;
+    color: var(--main-interface-element-color);
+    cursor: pointer;
 }
 
 .user-img, .contact-pic, .active-contact-img {
@@ -109,6 +97,9 @@ body {
 
 .search-bar-icon {
     width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-bar {
@@ -116,7 +107,9 @@ body {
 }
 
 .search-bar > input {
-    width: 100%;
+    width: 99%;
+    height: 40px;
+    border: none
 }
 
 .contact-list {
@@ -138,6 +131,7 @@ body {
 .contact-chat {
     position: relative;
     width: 100%;
+    cursor: pointer;
 }
 
 .contact-message {
@@ -167,6 +161,18 @@ body {
     display: flex;
 }
 
+.last-acces {
+    color: var(--main-interface-element-color);
+    margin-left: 8px;
+}
+
+.active-contact-actions * {
+    margin-right: 10px;
+    cursor: pointer;
+    padding: .5rem;
+    color: var(--main-interface-element-color);
+}
+
 .chat {
     height: 87%;
     overflow: auto;
@@ -191,12 +197,8 @@ body {
     margin-top: 10px;
 }
 
-
-
-
-
 .user-input-bar {
-    background-color: #fff;
+    background-color: var(--bg_primary-color);
     width: 100%;
     height: 5%;
     display: flex;
@@ -213,6 +215,17 @@ body {
     width: 80%;
 }
 
+.emojis > i, .rec i  {
+    color: var(--main-interface-element-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
 .message-bar > input {
     width: 100%;
+    height: 40px;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .3rem;
 }
