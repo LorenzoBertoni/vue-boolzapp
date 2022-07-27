@@ -181,7 +181,7 @@ body {
 
 .sent-message {
     background-color: var(--user-message-bg_color);
-    margin-left: 620px;
+    margin-left: 550px;
     margin-top: 10px;
 }
 

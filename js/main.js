@@ -167,7 +167,9 @@ const app = new Vue({
         ]
     },
     methods: {
-        
+        changeChat(index) {
+            this.activeContact = index;
+        }
     }
 });  
 
