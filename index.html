@@ -7,14 +7,63 @@
     <title>BoolzApp</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="debug">
+
+    <div class="bg_color"></div>
     
-    <div id="app"></div>
+    <div id="app">
 
+        <div class="web-app-main-container">
 
+            <aside class="main-container-aside">
+                <header class="aside-header">
+                    <div class="user">
+                        <div class="user-info">
+                            <img class="user-img" src="img/avatar_1.jpg" alt="">
+                            <span class="user-name">Username</span>
+                        </div>
 
+                        <div class="user-actions">
+                            <span>icon</span>
+                            <span>icon</span>
+                            <span>icon</span>
+                        </div>
+                    </div>
+                </header>
 
+                <div class="aside-search-bar">
+                    <div class="search-bar-icon">
+                        <span>icon</span>
+                    </div>
 
+                    <div class="search-bar">
+                        <input type="text" placeholder="cerca">
+                    </div>
+                </div>
+
+                <div class="contact-list">
+                    <div class="contact" v-for="contact in contacts">
+                        <div class="contact-pic-container">
+                            <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                        </div>
+
+                        <div class="contact-chat">
+                            <h3 class="contact-name">{{contact.name}}</h3>
+                            <p class="contact-message">Ultimo messaggio inviato</p>
+                            <p class="contact-hour">12:00</p>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="main-container-body">
+
+            </main>
+
+        </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
