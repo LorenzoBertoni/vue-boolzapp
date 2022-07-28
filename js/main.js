@@ -173,7 +173,7 @@ const app = new Vue({
             var DateTime = luxon.DateTime;
             const date = DateTime.now().minus({minutes: 15}).toFormat('HH:mm');
             return date;
-        },
+        }
     },
     methods: {
         changeChat(index) {

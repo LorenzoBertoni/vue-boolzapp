@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-    <div class="bg_color"></div>
     
     <div id="app">
         <div class="web-app-main-container" style="min-width: 950px;">
@@ -30,7 +28,7 @@
                     </div>
                 </header>
 
-                <div class="aside-search-bar">
+                <section class="aside-search-bar">
                     <div class="search-bar-icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
@@ -38,30 +36,40 @@
                     <div class="search-bar">
                         <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
                     </div>
-                </div>
+                </section>
 
-                <div class="contact-list">
+                <section class="notifications">
+                    <div class="turn-on-notifications">
+                        <i class="fa-solid fa-bell-slash"></i>
+                        <div class="cta-text">
+                            <p>Ricevi notifiche di nuovi messaggi</p>
+                            <a href="#">Attiva notifiche desktop</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contact-list">
                     <div class="contact" v-for="(contact,index) in contacts" @click="changeChat(index)"
                     :class="(index == activeContact)? 'active': '' " v-if="contact.visible == true">
                         <div class="contact-pic-container">
-                            <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                            <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
                         </div>
 
                         <div class="contact-chat">
                             <h3 class="contact-name">{{contact.name}}</h3>
-                            <p class="contact-message">Ultimo messaggio inviato</p>
+                            <p class="contact-message">Ultimo messaggio ricevuto</p>
                             <p class="contact-hour">{{getDate}}</p>
                         </div>
                         <hr>
                     </div>
-                </div>
+                </section>
             </aside>
 
             <main class="main-container-body">
                 <header class="main-body-header">
                     <div class="active-contact-info-container">
                         <div class="active-contact-pic-container">
-                            <img class="active-contact-img " :src="'img/avatar' + contacts[activeContact].avatar + '.jpg'" alt="">
+                            <img class="active-contact-img " :src="'img/avatar' + contacts[activeContact].avatar + '.jpg'" :alt="contacts[activeContact].name">
                         </div>
                         
                         <div class="active-contact-info">
@@ -75,7 +83,6 @@
                         <i class="fa-solid fa-paperclip"></i>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
-                    
                 </header>
 
                 <main class="chat">
