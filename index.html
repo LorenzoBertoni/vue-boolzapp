@@ -85,7 +85,7 @@
                             <ul>
                                 <li>Info Messaggio</li>
                                 <hr>
-                                <li @click="deleteMessage(index)">Elimina Messaggio</li>
+                                <li @click="deleteMessage(index)" v-if="message.status == 'sent'">Elimina Messaggio</li>
                             </ul>
                         </div>
                     </div>
