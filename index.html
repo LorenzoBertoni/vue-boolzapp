@@ -13,7 +13,7 @@
     <div class="bg_color"></div>
     
     <div id="app">
-        <div class="web-app-main-container">
+        <div class="web-app-main-container" style="min-width: 950px;">
             <aside class="main-container-aside">
                 <header class="aside-header">
                     <div class="user">
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="search-bar">
-                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
+                        <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                         <div class="contact-chat">
                             <h3 class="contact-name">{{contact.name}}</h3>
                             <p class="contact-message">Ultimo messaggio inviato</p>
-                            <p class="contact-hour">12:00</p>
+                            <p class="contact-hour">{{getDate}}</p>
                         </div>
                         <hr>
                     </div>
@@ -66,7 +66,7 @@
                         
                         <div class="active-contact-info">
                             <h3 class="contact-name">{{contacts[activeContact].name}}</h3>
-                            <p class="last-acces">Ultimo accesso oggi alle 12:00</p>
+                            <p class="last-acces">Ultimo accesso oggi alle {{getDate}}</p>
                         </div>
                     </div>
 
@@ -79,8 +79,15 @@
                 </header>
 
                 <main class="chat">
-                    <div class="message" v-for="message in contacts[activeContact].messages" :class="(message.status == 'sent')? 'sent-message': 'received-message'">
+                    <div class="message" v-for="(message,index) in contacts[activeContact].messages" :class="(message.status == 'sent')? 'sent-message': 'received-message'" @click="getMsgActions(index)">
                         <p class="message-text">{{message.message}}</p>
+                        <div class="message-actions hidden">
+                            <ul>
+                                <li>Info Messaggio</li>
+                                <hr>
+                                <li @click="deleteMessage(index)">Elimina Messaggio</li>
+                            </ul>
+                        </div>
                     </div>
                 </main>
 
@@ -99,6 +106,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>

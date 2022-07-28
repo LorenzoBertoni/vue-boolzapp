@@ -168,6 +168,13 @@ const app = new Vue({
             }
         ]
     },
+    computed: {
+        getDate() {
+            var DateTime = luxon.DateTime;
+            const date = DateTime.now().minus({minutes: 15}).toFormat('HH:mm');
+            return date;
+        },
+    },
     methods: {
         changeChat(index) {
             this.activeContact = index;
@@ -201,6 +208,14 @@ const app = new Vue({
                     contact.visible = false;
                 }
             });
+        },
+        getMsgActions(index) {
+            let menu = document.querySelectorAll('.message-actions');
+            menu[index].classList.toggle('hidden');
+        },
+        deleteMessage(index) {
+            let msgArray = this.contacts[this.activeContact].messages;
+            msgArray.splice(index, 1);
         }
     }
 });  
