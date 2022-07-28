@@ -158,7 +158,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 8%;
+    height: 80px;
 }
 
 .active-contact-info-container {
@@ -178,7 +178,7 @@ body {
 }
 
 .chat {
-    height: 87%;
+    height: calc(100% - 160px);
     overflow: auto;
 }
 
@@ -204,7 +204,7 @@ body {
 .user-input-bar {
     background-color: var(--bg_primary-color);
     width: 100%;
-    height: 5%;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-around;

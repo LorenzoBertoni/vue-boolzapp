@@ -36,13 +36,13 @@
                     </div>
 
                     <div class="search-bar">
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
                     </div>
                 </div>
 
                 <div class="contact-list">
                     <div class="contact" v-for="(contact,index) in contacts" @click="changeChat(index)"
-                    :class="(index == activeContact)? 'active': '' ">
+                    :class="(index == activeContact)? 'active': '' " v-if="contact.visible == true">
                         <div class="contact-pic-container">
                             <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
                         </div>

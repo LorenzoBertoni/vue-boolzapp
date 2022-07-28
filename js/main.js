@@ -3,6 +3,7 @@ const app = new Vue({
     data: {
         activeContact: 0,
         input: '',
+        searchBarInput: '',
         contacts: [
             {
                 name: 'Michele',
@@ -191,6 +192,15 @@ const app = new Vue({
                         status: 'received'
                         };
             this.contacts[this.activeContact].messages.push(text);
+        },
+        search() {
+            this.contacts.forEach(contact => {
+                if(contact.name.toLowerCase().includes(this.searchBarInput)) {
+                    contact.visible = true;
+                } else {
+                    contact.visible = false;
+                }
+            });
         }
     }
 });  
