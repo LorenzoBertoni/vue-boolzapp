@@ -1,120 +1,123 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoolzApp</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-    
-    <div id="app">
-        <div class="web-app-main-container" style="min-width: 950px;">
-            <aside class="main-container-aside">
-                <header class="aside-header">
-                    <div class="user">
-                        <div class="user-info">
-                            <img class="user-img" src="img/avatar_7.jpg" alt="Profile pic">
-                            <span class="user-name">Lorenzo</span>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BoolzApp</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <div id="app">
+            <div class="web-app-main-container" style="min-width: 950px;">
+                <aside class="main-container-aside">
+                    <header class="aside-header">
+                        <div class="user">
+                            <div class="user-info">
+                                <img class="user-img" src="img/avatar_7.jpg" :alt="`${user.name}'s profile pic`">
+                                <span class="user-name">{{user.name}}</span>
+                            </div>
+
+                            <div class="user-actions">
+                                <i class="fa-solid fa-circle-notch"></i>
+                                <i class="fa-solid fa-message"></i>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                    </header>
+
+                    <section class="aside-search-bar">
+                        <div class="search-bar-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
 
-                        <div class="user-actions">
-                            <i class="fa-solid fa-circle-notch"></i>
-                            <i class="fa-solid fa-message"></i>
+                        <div class="search-bar">
+                            <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
+                        </div>
+                    </section>
+
+                    <section class="notifications">
+                        <div class="turn-on-notifications">
+                            <i class="fa-solid fa-bell-slash"></i>
+                            <div class="cta-text">
+                                <p>Ricevi notifiche di nuovi messaggi</p>
+                                <a href="#" class="get-notifications" @click="getDesktopNotif">Attiva notifiche desktop</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="contact-list">
+                        <div class="contact" v-for="(contact,index) in contacts" @click="changeChat(index)"
+                        :class="(index == activeContact)? 'active': '' " v-if="contact.visible == true">
+                            <div class="contact-pic-container">
+                                <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                            </div>
+
+                            <div class="contact-chat">
+                                <h3 class="contact-name">{{contact.name}}</h3>
+                                <p class="contact-message">Ultimo messaggio ricevuto</p>
+                                <p class="contact-hour">{{getHour}}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    </section>
+                </aside>
+
+                <main class="main-container-body">
+                    <header class="main-body-header">
+                        <div class="active-contact-info-container">
+                            <div class="active-contact-pic-container">
+                                <img class="active-contact-img " :src="'img/avatar' + contacts[activeContact].avatar + '.jpg'" :alt="contacts[activeContact].name">
+                            </div>
+                            
+                            <div class="active-contact-info">
+                                <h3 class="contact-name">{{contacts[activeContact].name}}</h3>
+                                <p class="last-acces">Ultimo accesso oggi alle {{getHour}}</p>
+                            </div>
+                        </div>
+
+                        <div class="active-contact-actions">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip"></i>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
-                    </div>
-                </header>
+                    </header>
 
-                <section class="aside-search-bar">
-                    <div class="search-bar-icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-
-                    <div class="search-bar">
-                        <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchBarInput" @input="search">
-                    </div>
-                </section>
-
-                <section class="notifications">
-                    <div class="turn-on-notifications">
-                        <i class="fa-solid fa-bell-slash"></i>
-                        <div class="cta-text">
-                            <p>Ricevi notifiche di nuovi messaggi</p>
-                            <a href="#">Attiva notifiche desktop</a>
+                    <main class="chat">
+                        <div class="message" v-for="(message,index) in contacts[activeContact].messages" :class="(message.status == 'sent')? 'sent-message': 'received-message'" @click="getMsgActions(index)">
+                            <p class="message-text">{{message.message}}</p>
+                            <p><small class="message-hour">{{message.date}}</small></p>
+                            <div class="message-actions hidden">
+                                <ul>
+                                    <li>Info Messaggio</li>
+                                    <hr>
+                                    <li @click="deleteMessage(index)">Elimina Messaggio</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </main>
 
-                <section class="contact-list">
-                    <div class="contact" v-for="(contact,index) in contacts" @click="changeChat(index)"
-                    :class="(index == activeContact)? 'active': '' " v-if="contact.visible == true">
-                        <div class="contact-pic-container">
-                            <img class="contact-pic" :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                    <footer class="user-input-bar">
+                        <div class="emojis">
+                            <i @click="showEmojis" class="fa-regular fa-face-smile"></i>
+                            <div class="emojis-icons hidden">
+                                <span v-for="(emoji, index) in emojis" @click="getEmoji(index)" class="emoji-icon">{{emoji}}</span>
+                            </div>
                         </div>
-
-                        <div class="contact-chat">
-                            <h3 class="contact-name">{{contact.name}}</h3>
-                            <p class="contact-message">Ultimo messaggio ricevuto</p>
-                            <p class="contact-hour">{{getDate}}</p>
+                        <div class="message-bar">
+                            <input type="text" placeholder="Scrivi un messaggio" class="message-input" v-model="input" @keyup.enter="sendMessage">
                         </div>
-                        <hr>
-                    </div>
-                </section>
-            </aside>
-
-            <main class="main-container-body">
-                <header class="main-body-header">
-                    <div class="active-contact-info-container">
-                        <div class="active-contact-pic-container">
-                            <img class="active-contact-img " :src="'img/avatar' + contacts[activeContact].avatar + '.jpg'" :alt="contacts[activeContact].name">
+                        <div class="rec">
+                            <i class="fa-solid fa-microphone"></i>
                         </div>
-                        
-                        <div class="active-contact-info">
-                            <h3 class="contact-name">{{contacts[activeContact].name}}</h3>
-                            <p class="last-acces">Ultimo accesso oggi alle {{getDate}}</p>
-                        </div>
-                    </div>
-
-                    <div class="active-contact-actions">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <i class="fa-solid fa-paperclip"></i>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                </header>
-
-                <main class="chat">
-                    <div class="message" v-for="(message,index) in contacts[activeContact].messages" :class="(message.status == 'sent')? 'sent-message': 'received-message'" @click="getMsgActions(index)">
-                        <p class="message-text">{{message.message}}</p>
-                        <div class="message-actions hidden">
-                            <ul>
-                                <li>Info Messaggio</li>
-                                <hr>
-                                <li @click="deleteMessage(index)" v-if="message.status == 'sent'">Elimina Messaggio</li>
-                            </ul>
-                        </div>
-                    </div>
+                    </footer>
                 </main>
-
-                <footer class="user-input-bar">
-                    <div class="emojis">
-                        <i class="fa-regular fa-face-smile"></i>
-                    </div>
-                    <div class="message-bar">
-                        <input type="text" placeholder="Scrivi un messaggio" class="message-input" v-model="input" @keyup.enter="sendMessage">
-                    </div>
-                    <div class="rec">
-                        <i class="fa-solid fa-microphone"></i>
-                    </div>
-                </footer>
-            </main>
+            </div>
         </div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
 </html>

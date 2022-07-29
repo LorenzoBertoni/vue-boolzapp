@@ -216,6 +216,11 @@ body {
     background-color: #009688;
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .sent-message {
@@ -257,6 +262,10 @@ body {
     display: none;
 }
 
+.message-hour {
+    color: var(--main-interface-element-color);
+}
+
 .user-input-bar {
     background-color: var(--bg_primary-color);
     width: 100%;
@@ -264,6 +273,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: relative;
 }
 
 .emojis, .rec {
@@ -284,6 +294,21 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     margin-left: 10px;
+}
+
+.emojis-icons {
+    position: absolute;
+    top: -70px;
+    left: 10px;
+    background-color: var(--bg_secondary-color);
+    padding: 1rem;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+}
+
+.emoji-icon {
+    margin: 0 .5rem;
+    cursor: pointer;
 }
 
 .message-bar > input {

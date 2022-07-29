@@ -1,6 +1,15 @@
+var DateTime = luxon.DateTime;
+
 const app = new Vue({
     el: '#app',
     data: {
+        user: {
+            name: 'Lorenzo',
+            avatar: '_7'
+        },
+        emojis: [
+            '👌', '🤣', '😊', '😁', '😘', '🎉', '😍', '❤', '🤷‍♂️', '👏', '🤦‍♂️'
+        ],
         activeContact: 0,
         input: '',
         searchBarInput: '',
@@ -11,17 +20,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Hai portato a spasso il cane?',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'Ricordati di stendere i panni',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 16:15:22',
+                                date: '16:15',
                                 message: 'Tutto fatto!',
                                 status: 'received'
                             }
@@ -33,17 +42,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '20/03/2020 16:30:00',
+                                date: '16:30',
                                 message: 'Ciao come stai?',
                                 status: 'sent'
                             },
                             {
-                                date: '20/03/2020 16:30:55',
+                                date: '16:30',
                                 message: 'Bene grazie! Stasera ci vediamo?',
                                 status: 'received'
                             },
                             {
-                                date: '20/03/2020 16:35:00',
+                                date: '16:35',
                                 message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                                 status: 'sent'
                             }
@@ -55,17 +64,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '28/03/2020 10:10:40',
+                                date: '10:10',
                                 message: 'La Marianna va in campagna',
                                 status: 'received'
                             },
                                 {
-                                date: '28/03/2020 10:20:10',
+                                date: '10:20',
                                 message: 'Sicuro di non aver sbagliato chat?',
                                 status: 'sent'
                             },
                             {
-                                date: '28/03/2020 16:15:22',
+                                date: '16:15',
                                 message: 'Ah scusa!',
                                 status: 'received'
                             }
@@ -77,12 +86,12 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Lo sai che ha aperto una nuova pizzeria?',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'Si, ma preferirei andare al cinema',
                                 status: 'received'
                             }
@@ -94,12 +103,12 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Ricordati di chiamare la nonna',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'Va bene, stasera la sento',
                                 status: 'received'
                             }
@@ -111,17 +120,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Ciao Claudia, hai novità?',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'Non ancora',
                                 status: 'received'
                             },
                             {
-                                date: '10/01/2020 15:51:00',
+                                date: '15:51',
                                 message: 'Nessuna nuova, buona nuova',
                                 status: 'sent'
                             }
@@ -133,12 +142,12 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Fai gli auguri a Martina che è il suo compleanno!',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'Grazie per avermelo ricordato, le scrivo subito!',
                                 status: 'received'
                             }
@@ -150,17 +159,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                             {
-                                date: '10/01/2020 15:30:55',
+                                date: '15:30',
                                 message: 'Ciao, andiamo a mangiare la pizza stasera?',
                                 status: 'received'
                             },
                             {
-                                date: '10/01/2020 15:50:00',
+                                date: '15:50',
                                 message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
                                 status: 'sent'
                             },
                             {
-                                date: '10/01/2020 15:51:00',
+                                date: '15:51',
                                 message: 'OK!!',
                                 status: 'received'
                             }
@@ -169,8 +178,7 @@ const app = new Vue({
         ]
     },
     computed: {
-        getDate() {
-            var DateTime = luxon.DateTime;
+        getHour() {
             const date = DateTime.now().minus({minutes: 15}).toFormat('HH:mm');
             return date;
         }
@@ -183,8 +191,8 @@ const app = new Vue({
             if (!this.input.trim() == '') {
                 this.contacts[this.activeContact].messages.push(
                     {
-                        date: '10/01/2020 15:50:00',
-                        message: this.input,
+                        date: this.getMsgHour(),
+                        message: this.input.trim(),
                         status: 'sent'
                     }
                 )
@@ -194,7 +202,7 @@ const app = new Vue({
         },
         getReply() {
             let text =  {
-                        date: '10/01/2020 15:50:00',
+                        date: this.getMsgHour(),
                         message: 'ok',
                         status: 'received'
                         };
@@ -216,6 +224,22 @@ const app = new Vue({
         deleteMessage(index) {
             let msgArray = this.contacts[this.activeContact].messages;
             msgArray.splice(index, 1);
+        },
+        getDesktopNotif() {
+            let notifications = document.querySelector('.notifications');
+            notifications.classList.add('hidden');
+            alert('notifiche attivate');
+        },
+        getMsgHour() {
+            const date = DateTime.now().toFormat('HH:mm');
+            return date;
+        },
+        showEmojis() {
+            const emojis = document.querySelector('.emojis-icons');
+            emojis.classList.toggle('hidden');
+        },
+        getEmoji(index) {
+            this.input += this.emojis[index]
         }
     }
 });  
