@@ -13,6 +13,7 @@ const app = new Vue({
         activeContact: 0,
         input: '',
         searchBarInput: '',
+        newContactInput: '',
         contacts: [
             {
                 name: 'Michele',
@@ -203,7 +204,7 @@ const app = new Vue({
         getReply() {
             let text =  {
                         date: this.getMsgHour(),
-                        message: 'ok',
+                        message: 'Ok',
                         status: 'received'
                         };
             this.contacts[this.activeContact].messages.push(text);
@@ -239,8 +240,26 @@ const app = new Vue({
             emojis.classList.toggle('hidden');
         },
         getEmoji(index) {
-            this.input += this.emojis[index]
+            this.input += this.emojis[index];
+        },
+        openModal(){
+            const modal = document.getElementById('myModal');
+                modal.classList.remove('hidden');
+        },
+        closeModal(){
+            const modal = document.getElementById('myModal');
+            modal.classList.add('close-input');
+        },
+        addNewContact() {
+            this.contacts.push(
+                                {
+                                    name: this.newContactInput,
+                                    avatar: '_8',
+                                    visible: true,
+                                    messages: []
+                                }
+            );
+            this.newContactInput = '';
         }
     }
-});  
-
+});

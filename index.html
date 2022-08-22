@@ -20,6 +20,14 @@
                             </div>
 
                             <div class="user-actions">
+                                <i id="add-new-contact" class="fa-solid fa-plus" @click="openModal">
+                                    <div id="myModal" class="modal hidden">
+                                        <div class="modal-content">
+                                            <span class="close" @click="closeModal">&times;</span>
+                                            <input id="new-contact-input" type="text" placeholder="Inserisci il nome del contatto da salvare" v-model="newContactInput" @keyup.enter="addNewContact">
+                                        </div>
+                                    </div>
+                                </i>
                                 <i class="fa-solid fa-circle-notch"></i>
                                 <i class="fa-solid fa-message"></i>
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
@@ -88,6 +96,7 @@
                         <div class="message" v-for="(message,index) in contacts[activeContact].messages" :class="(message.status == 'sent')? 'sent-message': 'received-message'" @click="getMsgActions(index)">
                             <p class="message-text">{{message.message}}</p>
                             <p><small class="message-hour">{{message.date}}</small></p>
+
                             <div class="message-actions hidden">
                                 <ul>
                                     <li>Info Messaggio</li>
@@ -95,6 +104,7 @@
                                     <li @click="deleteMessage(index)">Elimina Messaggio</li>
                                 </ul>
                             </div>
+                            
                         </div>
                     </main>
 
